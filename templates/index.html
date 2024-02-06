@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ermine.at - Kunst</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+		.button:hover {
+    transform: scale(1.02); /* Scales up the button */
+    background-color: lighten(currentColor, 10%); /* Lightens the background color */
+}
+
+
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            max-width: 20%; /* Reduced by 50% */
+            height: auto;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px 0;
+        }
+
+        .button {
+            font-weight: bold;
+            border: none;
+            padding: 30px 60px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /* Button colors */
+        .button-color-1 { background-color: #003049; color: white; }
+        .button-color-2 { background-color: #D62828; color: white; }
+        .button-color-3 { background-color: #F77F00; color: black; }
+        .button-color-4 { background-color: #FCBF49; color: black; }
+        .button-color-5 { background-color: #EAE2B7; color: black; }
+        .button-color-6 { background-color: #9CB380; color: black; }
+        .button-color-7 { background-color: #1B98E0; color: black; }
+        .button-color-8 { background-color: #2E933C; color: black; }
+
+        .audio-container {
+            width: calc(16.66% - 20px); /* Six columns on larger screens */
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .audio-info {
+            font-size: 25px;
+            margin-top: 10px;
+        }
+
+        /* Video background */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Adjust layout on mobile */
+        @media (max-width: 768px) {
+		
+			.logo {
+                max-width: 60%; /* Increased size for mobile */
+            }
+		
+            .audio-container {
+                width: calc(50% - 20px); /* Two columns on smaller screens */
+            }
+        }
+		
+		.image-container {
+            text-align: center;
+            margin-bottom: 20px;
+            box-sizing: border-box; /* Include padding and borders in the width calculation */
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Mobile layout */
+        @media (max-width: 768px) {
+            .image-container {
+                width: 100%; /* Each image takes 100% width for one column */
+                margin-right: 0; /* Remove margin to ensure full width */
+                float: none; /* Reset float for single column display */
+                clear: both; /* Clear float after each image */
+            }
+        }
+        
+                /* Desktop layout */
+        @media (min-width: 769px) {
+            .image-container {
+                width: calc(50% - 20px); /* Each image takes 50% width for two columns, accounting for margins */
+                margin: 10px;
+                display: inline-block; /* Display images inline */
+                vertical-align: top;
+                text-align: center;
+            }
+        }
+		
+			.calendly-button2 {
+        background-color: #2C2C54;
+		            font-weight: bold;
+
+        color: white;
+        border: none;
+            padding: 30px 60px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+  
+    .calendly-button2:hover {
+        background-color: #80A4ED;  /* A darker shade when hovered */
+    }
+	
+	.list-field {
+		background-color: rgba(0, 0, 0, 0.7);
+		border-radius: 10px;
+		padding: 20px;
+		margin: 20px auto;
+		color: white;
+		max-width: 70%;
+		text-align: center;
+						margin-bottom: 65px; /* Adjust this value for spacing between the buttons */
+
+	}
+    </style>
+	
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.button');
+    var buttonColors = ['button-color-1', 'button-color-2', 'button-color-3', 'button-color-4', 'button-color-5', 'button-color-6', 'button-color-7', 'button-color-8'];
+
+    buttons.forEach(function(button, index) {
+        // Assign a unique color to each button by cycling through the buttonColors array
+        var colorIndex = index % buttonColors.length; // Use modulo to loop back to start of array
+        button.classList.add(buttonColors[colorIndex]);
+    });
+});
+</script>
+
+	
+
+</head>
+<body>
+    
+    
+
+
+
+    <div id="content">
+        <div id="all-art">
+		
+    
+			
+			<div class="button-container">
+                {% for image in images %}
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='art/' + image) }}" alt="{{ image }}">
+                        <div class="audio-info">
+                            <p>{{ image.split('.')[0] }}</p> <!-- Display image name without extension -->
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div style="clear: both;"></div> <!-- Clear float after images -->
+        </div>
+    </div>
+</body>
+</html>
